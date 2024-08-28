@@ -1,4 +1,4 @@
-# This is a SPOT Exchange MVP 1 Project 
+# This is a SPOT Exchange 
 
 ## Major services involved are 
 
