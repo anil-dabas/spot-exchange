@@ -1,0 +1,74 @@
+#version: '3'
+
+services:
+  ########################SERVICES##########################
+
+  #  WEBSOCKET SERVICE ports from 30003
+  websocket-service:
+    image: ${REPO_NAME}/cex-websocket-service:${TAG_VERSION}-${PLATFORM}
+#    deploy:
+#      replicas: 1
+    container_name: websocket-service
+    ports:
+      - "30003:30003"
+    networks:
+      - service-network
+
+    #    volumes:
+    #      - ./config/app2/application.yml:/config/application.yml
+    environment:
+      - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://discovery:8761/eureka
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://${ZIPKIN_HOST}:9411/api/v2/spans
+      - LOGSTASH_HOST=${LOGSTASH_HOST}
+
+networks:
+  service-network:
+    external: true
+
+######################### ELK ZIP ##########################
+## Zipkin server
+#  zipkin:
+#    container_name: zipkin
+#    image: openzipkin/zipkin
+#    ports:
+#      - "9411:9411"
+#
+#  #    EKL config
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+#    container_name: elasticsearch
+#    environment:
+#      - discovery.type=single-node
+#    volumes:
+#      - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#
+#
+#  # LOG Stash config
+#  logstash:
+#    image: docker.elastic.co/logstash/logstash:7.10.1
+#    container_name: logstash
+#    command: -f /etc/logstash/conf.d/
+#    volumes:
+#      - ./config/logstash/:/etc/logstash/conf.d/
+#    ports:
+#      - "5044:5044"
+#      - "9600:9600"
+#    depends_on:
+#      - elasticsearch
+#
+#  #  Kibana
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana:7.10.1
+#    container_name: kibana
+#    volumes:
+#      - ./config/kibana/:/usr/share/kibana/config/
+#    ports:
+#      - "5601:5601"
+#    environment:
+#      ELASTICSEARCH_URL: http://elasticsearch:9200
+#    depends_on:
+#      - elasticsearch
+

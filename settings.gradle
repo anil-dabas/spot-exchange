@@ -1,0 +1,10 @@
+rootProject.name = 'c3-exchange'
+include(':market-data-service')
+include(':order-service')
+include(':user-preference-service')
+include(':portfolio-service')
+include(':auth-service')
+include(':notification-service')
+include(':onboarding-service')
+include(':websocket-service')
+include(':asset-service')

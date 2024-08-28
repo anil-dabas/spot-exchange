@@ -1,0 +1,122 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management'
+	id 'jacoco'
+}
+group = 'com.spot.websocket-service'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+jar {
+	enabled = false
+}
+
+bootJar {
+	enabled = true
+	mainClass = "com.spot.websocket.WebsocketServiceApplication"
+	archiveFileName = "websocket-service.jar"
+}
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	integrationTestImplementation.extendsFrom(testImplementation)
+	integrationTestRuntimeOnly.extendsFrom(testRuntimeOnly)
+}
+
+sourceSets {
+//	integrationTest {
+//		compileClasspath += sourceSets.main.output + sourceSets.test.output
+//		runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+//		java {
+//			srcDirs = ['src/integrationTest/java']
+//		}
+//		resources {
+//			srcDirs = ['src/integrationTest/resources']
+//		}
+//	}
+}
+
+//task integrationTest(type: Test) {
+//	description = 'Runs the integration tests.'
+//	group = 'verification'
+//	testClassesDirs = sourceSets.integrationTest.output.classesDirs
+//	classpath = sourceSets.integrationTest.runtimeClasspath
+//	shouldRunAfter test
+//	useJUnitPlatform()
+//}
+
+
+
+
+//check.dependsOn integrationTest
+
+// Jacoco code coverage
+test {
+	useJUnitPlatform()
+	finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required.set(false)
+		html.required.set(true)
+	}
+
+	additionalSourceDirs.setFrom(files(sourceSets.main.allSource.srcDirs))
+	sourceDirectories.setFrom(files(sourceSets.main.allSource.srcDirs))
+//	classDirectories.setFrom(files(sourceSets.main.output))
+
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					'com/coin12/websocket/mapper/**',
+					'com/coin12/websocket/dto/**',
+					'com/coin12/websocket/model/**',
+					'com/coin12/websocket/util/**',
+					'com/coin12/websocket/config/**',
+					'com/coin12/websocket/WebsocketServiceApplication**'
+			])
+		})
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	implementation 'org.springframework.kafka:spring-kafka'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// Tests
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.mockito:mockito-core'
+
+}
+
+

@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "91d04f08-54fe-4b2c-bb2a-8fc90875fd3e",
+		"name": "spot-ws-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36663833",
+		"_collection_link": "https://crimson-flare-386573.postman.co/workspace/My-Workspace~784159f2-efb1-429a-8043-f1315b000865/collection/36663833-91d04f08-54fe-4b2c-bb2a-8fc90875fd3e?action=share&source=collection_link&creator=36663833"
+	},
+	"item": [
+		{
+			"name": "listen-key",
+			"item": [
+				{
+					"name": "listen-key",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30003/api/v1/listenKey",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30003",
+							"path": [
+								"api",
+								"v1",
+								"listenKey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate key",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0MzI0MzIsInN1YiI6IjEyMzQ1Njc4OTAiLCJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3MjM3MDkxMzkwMDB9.gNBNdp1LWilacK0JlIPO1dMpZu-hFlSjZIrYtMxLgc7qXyS6bNx2xynueaIMwBw-i4RT0x5ZDUZ9vtJukweL1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30003/api/v1/listenKey/validate/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30003",
+							"path": [
+								"api",
+								"v1",
+								"listenKey",
+								"validate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ping",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30003/api/v1/listenKey/ping/zezHj3XGU0lbJtO2I2pO46L47zU7Xe9ywUozVDJkzWFhFpYtAhS31y3Qeiy5gAvI",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30003",
+							"path": [
+								"api",
+								"v1",
+								"listenKey",
+								"ping",
+								"zezHj3XGU0lbJtO2I2pO46L47zU7Xe9ywUozVDJkzWFhFpYtAhS31y3Qeiy5gAvI"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

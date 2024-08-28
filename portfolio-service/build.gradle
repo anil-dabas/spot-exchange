@@ -1,0 +1,25 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management'
+}
+group = 'com.spot.portfolio-service'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+bootJar {
+	enabled = true
+	mainClass = 'com.spot.portfolio.PortfolioServiceApplication'
+	archiveFileName = "portfolio-service.jar"
+}
+
+jar {
+	enabled = false
+}

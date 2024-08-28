@@ -1,0 +1,52 @@
+
+server:
+  port: 30003
+
+spring:
+  application:
+    name: websocket-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: spot.ws
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  security:
+    user:
+      name :  admin
+      password: admin
+
+# Websocket config
+ws:
+  # Config for all topics
+  topic:
+    market:
+      trade: matching.order.matched
+      depth: matching.depth.updated
+      ticker: spot.market.ticker
+    trade:
+      account: spot.order.portfolio.updated
+      order: spot.order.order.updated
+  # Group id
+  group-id:
+    market: spot.ws.market
+    trade: spot.ws.trade
+
+  security:
+    jwt:
+      secret: SBjWurSfX0JWJiNsiq3eluiCFxPReTAyvRV6i9ZTFCuchzogKV7P6nfcUkqVVOC6,AZCaxxJbbnRAKOw8RUk0KYmms9fsv9R2SB3FWj1D8nG6MlPrlbqoA4OiCdkBmtAH
+      expiration-time-in-minutes: 2
+    listen:
+      expiration-time-in-minutes: 2
+      # millis second: 1 minutes 60*1000
+      schedule-checking-time: 60_000
+
+
+# swagger document
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+

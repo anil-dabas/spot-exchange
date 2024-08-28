@@ -1,0 +1,18 @@
+market-data-service:
+  port: 8081
+portfolio-service:
+  port: 8082
+order-service:
+  port: 8083
+user-preference-service:
+  port: 8084
+auth-service:
+  port: 8085
+notification-service:
+  port: 8086
+onboarding-service:
+  port: 8087
+asset-service:
+  port: 8088
+websocket-service:
+  port: 8089

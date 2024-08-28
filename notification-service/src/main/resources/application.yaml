@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: notification-service
+
+
+logging:
+  level:
+    root: debug
+

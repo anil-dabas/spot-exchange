@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: MarketDataAggregator
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: trade_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      #bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  data:
+    redis:
+      host: redis
+      port: 6379
+  datasource:
+    url: jdbc:mysql://mysql:3306/database_name?allowPublicKeyRetrieval=true&useSSL=FALSE&serverTimezone=UTC
+    username: root
+    password: root_password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+kafka:
+  topic:
+    ohlc: ohlcTopic
+    ticker: spot.market.ticker
+  listener:
+    trade:
+      groupId: trade_group
+      topic: matching.order.matched
+    depth:
+      topic: matching.depth.updated
+      groupId: depth_listener_mktData
+      #tradelistener:
+      #topic: test_topic
+
+logging:
+  level:
+    com.spot: DEBUG
+    org.apache: INFO

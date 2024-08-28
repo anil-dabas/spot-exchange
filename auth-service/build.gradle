@@ -1,0 +1,72 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management'
+	id 'maven-publish'
+}
+group = 'com.spot.auth-service'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+
+	// Spring Boot Web Starter
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Spring Boot Security Starter
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Spring Boot WebSocket Starter
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	// JSON Web Token
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2' // Use jjwt-gson for Gson
+	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+	// Mockito
+	testImplementation 'org.mockito:mockito-core:5.11.0'
+
+	// Spring Boot Test Starter
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+/*	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.3.1'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.12.5'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'*/
+}
+
+bootJar {
+	enabled = true
+	mainClass = 'com.spot.auth.AuthServiceApplication'
+	archiveFileName = "auth-service.jar" // Customize the JAR file name if needed
+}
+
+jar {
+	enabled = true // Disable the default JAR task since we use bootJar
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId = 'com.spot.auth'
+			artifactId = 'auth-service'
+			version = '0.0.1-SNAPSHOT'
+
+			from components.java
+		}
+	}
+}
+
+tasks.named('publishToMavenLocal').configure {
+	doLast {
+		println "Published auth-service to Maven local repository"
+	}
+}

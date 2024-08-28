@@ -1,0 +1,27 @@
+{
+	"id": "f079dfe3-745c-4375-810b-70510205235a",
+	"values": [
+		{
+			"key": "order-port",
+			"value": "30001",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "market-port",
+			"value": "30002",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "jwt_token",
+			"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0MzI0MzIsInN1YiI6IjEyMzQ1Njc4OTAiLCJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3MjM3MDkxMzkwMDB9.gNBNdp1LWilacK0JlIPO1dMpZu-hFlSjZIrYtMxLgc7qXyS6bNx2xynueaIMwBw-i4RT0x5ZDUZ9vtJukweL1w",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-07-15T12:00:20.359Z",
+	"_postman_exported_using": "Postman/11.3.2"
+}
