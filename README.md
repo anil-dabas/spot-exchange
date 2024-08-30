@@ -23,3 +23,24 @@
 - Onboarding Service started on http://localhost:8087/swagger-ui/index.html
 - Custody Service started on http://localhost:8088/swagger-ui/index.html
 - Websocket Service started http://localhost:8089/swagger-ui/index.html
+
+
+## Details design for different services in scalable approach 
+
+### SPOT Exchange Overview 
+
+![img_2.png](img_2.png)
+
+### SPOT Exchange Full detailed design
+
+![img.png](img.png)
+
+### OMS 
+
+![img_3.png](img_3.png)
+
+### Notification service
+
+![img_1.png](img_1.png)
+
+###
